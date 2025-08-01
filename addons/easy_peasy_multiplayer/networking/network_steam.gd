@@ -18,9 +18,9 @@ func _ready() -> void:
 #region Main Network Function
 
 ## Creates a game server as the host. Passing in a lobby type to [param lobby_type] allows you to change the lobby visibility
-func become_host(lobby_type : Steam.LobbyType = Steam.LobbyType.LOBBY_TYPE_PUBLIC):
+func become_host(connection_info : Dictionary = { "steam_lobby_type" : Steam.LobbyType.LOBBY_TYPE_PUBLIC }):
 	if Network.steam_lobby_id == 0: # Prevents you from creating a lobby if you are currently connected to a different lobby
-		Steam.createLobby(lobby_type, Network.room_size)
+		Steam.createLobby(connection_info.steam_lobby_type, Network.room_size)
 
 ## Joins a game server using the lobby id in [Network.steam_lobby_id]
 func join_as_client():
@@ -53,7 +53,7 @@ func check_command_line() -> void:
 				# At this point, you'll probably want to change scenes
 				# Something like a loading into lobby screen
 				if Network._is_verbose:
-					print("Command line lobby ID: %s" % command_args[1])
+					print("Command line lobby ID: %d" % command_args[1])
 				Network.steam_lobby_id = int(command_args[1])
 				Network.is_host = false
 
@@ -63,7 +63,7 @@ func check_command_line() -> void:
 func _on_lobby_created(response : int, lobby_id : int):
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS: # On connected OK
 		Network.steam_lobby_id = lobby_id
-		print("Created lobby: %s" % lobby_id)
+		print("Created lobby: %d" % lobby_id)
 
 		Steam.setLobbyJoinable(Network.steam_lobby_id, true)
 
@@ -86,7 +86,7 @@ func _create_host():
 	Network.player_connected.emit(1, Network.player_info)
 	Network.is_host = true
 	if Network._is_verbose:
-		print("Steam lobby hosted with id %s" % Network.steam_lobby_id)
+		print("Steam lobby hosted with id %d" % Network.steam_lobby_id)
 
 ## Callback function that runs when Steam responds to a [Network.list_lobbies] query with... a list of lobbies :O
 func _on_lobby_match_list(lobbies: Array) -> void:
@@ -130,7 +130,7 @@ func _on_lobby_joined(lobby_id : int, _permissions : int, _locked : bool, respon
 			11: FAIL_REASON = "A user you have blocked is in the lobby."
 		if FAIL_REASON:
 			if Network._is_verbose:
-				print("Steam lobby connection failed with error: " % FAIL_REASON)
+				print("Steam lobby connection failed with error: %s" % FAIL_REASON)
 
 ## Creates a SteamMultiplayerPeer client
 func connect_socket(steam_id : int):

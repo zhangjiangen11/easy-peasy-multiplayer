@@ -159,10 +159,14 @@ func _remove_active_network():
 
 #region Network-Specific Functions
 
-## Creates a new server using the currently selected [Steam.active_network_type]. If the network type is [constant Network.MultiplayerNetworkType.STEAM], you can pass in a [Steam.LobbyType] into [param lobby_type] to specify the visibility of the lobby.
-func become_host(lobby_type : Steam.LobbyType = Steam.LobbyType.LOBBY_TYPE_PUBLIC):
+## Creates a new server using the currently selected [Steam.active_network_type]. Additional information regarding the connection can be passed through [param connection_info]. For [Network.MultiplayerNetworkType.STEAM]
+func become_host(connection_info : Dictionary = {
+	"steam_lobby_type" : Steam.LobbyType.LOBBY_TYPE_PUBLIC,
+	"port" : null
+}):
 	_build_multiplayer_network()
-	active_network.become_host(lobby_type)
+	active_network.become_host(connection_info)
+
 
 ## Joins a lobby as a client using either the [Network.ip_address] or [Network.steam_lobby_id], depending on the current [Network.active_network_type]
 func join_as_client():
