@@ -68,12 +68,12 @@ func _ready():
 
 	# Sets the default username to the users Steam name, or if that doesnt exist, the OS name
 	if SteamInfo.steam_username:
-		Network.player_info["name"] = SteamInfo.steam_username
+		player_info["name"] = SteamInfo.steam_username
 	elif OS.has_environment("USERNAME"):
-		Network.player_info["name"] = OS.get_environment("USERNAME")
+		player_info["name"] = OS.get_environment("USERNAME")
 	else:
 		var desktop_path := OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/").split("/")
-		Network.player_info["name"] = desktop_path[desktop_path.size() - 2]
+		player_info["name"] = desktop_path[desktop_path.size() - 2]
 
 	# This is specifically for interfacing with my custom dev tools, which can be found here: https://godotengine.org/asset-library/asset/4028)
 	#DevTools.create_command("set_network", dev_set_network, "Sets the network type. Call without arguments to list available networks")
@@ -172,14 +172,14 @@ func join_as_client():
 ## Disconnects the current peer from any connected servers. A [enum Network.MultiplayerNetworkType] can optionally be passed to set the network type to use after disconnecting, which can be useful for instances like going back to the lobby browser after leaving a server.
 func disconnect_from_server(network_type : MultiplayerNetworkType = MultiplayerNetworkType.DISABLED):
 	# This expression may not be necessary
-	if Network.steam_lobby_id != 0:
-		Steam.leaveLobby(Network.steam_lobby_id)
+	if steam_lobby_id != 0:
+		Steam.leaveLobby(steam_lobby_id)
 
 	active_network_type = network_type
 	multiplayer.multiplayer_peer = null
 	connected_players.clear()
 	steam_lobby_id = 0
-	Network.is_host = false
+	is_host = false
 	_build_multiplayer_network(true)
 
 ## Lists any lobbies that the current [Network.active_network_type] can find. NOTE: This function does nothing when using Enet as the network type, as there is no lobby system when using Enet.
