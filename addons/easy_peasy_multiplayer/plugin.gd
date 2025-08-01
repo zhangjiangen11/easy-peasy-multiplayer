@@ -16,7 +16,7 @@ const SETTINGS: Dictionary = {
 	}
 }
 
-func _enable_plugin():
+func _enter_tree() -> void:
 	var godotsteam_exists := DirAccess.dir_exists_absolute("res://addons/godotsteam/")
 	var multiplayer_peer_exists := DirAccess.dir_exists_absolute("res://addons/steam-multiplayer-peer")
 
@@ -36,7 +36,7 @@ func _enable_plugin():
 
 		EditorInterface.popup_dialog_centered(dialog)
 
-func _disable_plugin():
+func _exit_tree() -> void:
 	# Removes autoloads
 	for autoload in AUTOLOADS:
 		remove_autoload_singleton(autoload)
