@@ -17,18 +17,9 @@ run/main_scene="uid://pmsw6eydfmh5"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://c1julnh5bh8n1"
 
-[autoload]
-
-SteamInfo="*res://addons/easy_peasy_multiplayer/steam_info.gd"
-Network="*res://addons/easy_peasy_multiplayer/networking/network.gd"
-
 [debug]
 
 file_logging/enable_file_logging=true
-
-[easy_peasy_multiplayer]
-
-general/verbose_network_logging=true
 
 [editor_plugins]
 
