@@ -162,7 +162,7 @@ func _remove_active_network():
 ## Creates a new server using the currently selected [Steam.active_network_type]. Additional information regarding the connection can be passed through [param connection_info]. For [Network.MultiplayerNetworkType.STEAM]
 func become_host(connection_info : Dictionary = {
 	"steam_lobby_type" : Steam.LobbyType.LOBBY_TYPE_PUBLIC,
-	"port" : null
+	"port" : NetworkEnet.DEFAULT_PORT
 }):
 	_build_multiplayer_network()
 	active_network.become_host(connection_info)

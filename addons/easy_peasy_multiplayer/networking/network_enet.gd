@@ -9,7 +9,7 @@ var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
 #region Network-Specific Functions
 ## Creates a game server as the host. See [Network.become_host] for more information
-func become_host(connection_info : Dictionary = { "port" : null }):
+func become_host(connection_info : Dictionary = { "port" : DEFAULT_PORT }):
 	var error = peer.create_server(connection_info.port, Network.room_size)
 	if error:
 		if Network._is_verbose:
