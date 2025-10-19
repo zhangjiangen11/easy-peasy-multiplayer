@@ -165,13 +165,15 @@ func become_host(connection_info : Dictionary = {
 	"port" : NetworkEnet.DEFAULT_PORT
 }):
 	_build_multiplayer_network()
-	active_network.become_host(connection_info)
+	if active_network_type != MultiplayerNetworkType.DISABLED:
+		active_network.become_host(connection_info)
 
 
 ## Joins a lobby as a client using either the [Network.ip_address] or [Network.steam_lobby_id], depending on the current [Network.active_network_type]
 func join_as_client():
 	_build_multiplayer_network()
-	active_network.join_as_client()
+	if active_network_type != MultiplayerNetworkType.DISABLED:
+		active_network.join_as_client()
 
 ## Disconnects the current peer from any connected servers. A [enum Network.MultiplayerNetworkType] can optionally be passed to set the network type to use after disconnecting, which can be useful for instances like going back to the lobby browser after leaving a server.
 func disconnect_from_server(network_type : MultiplayerNetworkType = MultiplayerNetworkType.DISABLED):
@@ -189,7 +191,8 @@ func disconnect_from_server(network_type : MultiplayerNetworkType = MultiplayerN
 ## Lists any lobbies that the current [Network.active_network_type] can find. NOTE: This function does nothing when using Enet as the network type, as there is no lobby system when using Enet.
 func list_lobbies():
 	_build_multiplayer_network()
-	active_network.list_lobbies()
+	if active_network_type != MultiplayerNetworkType.DISABLED:
+		active_network.list_lobbies()
 #endregion
 
 #region MultiplayerAPI Signals
