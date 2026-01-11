@@ -81,10 +81,10 @@ func _create_host():
 		return error
 
 	multiplayer.multiplayer_peer = peer
+	Network.is_host = true
 	Network.connected_players[1] = Network.player_info
 	Network.server_started.emit()
 	Network.player_connected.emit(1, Network.player_info)
-	Network.is_host = true
 	if Network._is_verbose:
 		print("Steam lobby hosted with id %d" % Network.steam_lobby_id)
 

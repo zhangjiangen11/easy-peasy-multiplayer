@@ -19,10 +19,10 @@ func become_host(connection_info : Dictionary = { "port" : DEFAULT_PORT }):
 
 	multiplayer.multiplayer_peer = peer
 
+	Network.is_host = true
 	Network.connected_players[1] = Network.player_info
 	Network.server_started.emit()
 	Network.player_connected.emit(1, Network.player_info)
-	Network.is_host = true
 	if Network._is_verbose:
 		print("ENet Server hosted on port %d" % connection_info.port)
 
