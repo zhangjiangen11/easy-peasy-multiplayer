@@ -1,5 +1,9 @@
 # Easy Peasy Multiplayer
-### Multiplayer in Godot has never been easier
+> [!NOTE]
+> ### V2.0 Notice!
+> As of 2026-10-1 I am working on a major update to how the plugin chooses and interacts with MultiplayerPeers, which will make adding custom networking implementations MUCH easier! The latest work can be found in the `2.0-refactor` branch.
+
+### Multiplayer in Godot has never been easier!
 This plugin provides all of the backend tools you need to quickly start making a networked game in Godot! This plugin handles setting up MultiplayerPeers, lobby creation, network switching, and of course, connecting to servers. You will only need to: 
 - Create a way to interface with the plugin (Or you can use a prebuilt UI that I have already created as a starting point [Here](https://github.com/Skeats/easy-peasy-multiplayer/tree/main/prefabs/ui/network_ui))
 - Add Godot's [MultiplayerSpawners](https://docs.godotengine.org/en/stable/classes/class_multiplayerspawner.html) and [MultiplayerSynchronizers](https://docs.godotengine.org/en/stable/classes/class_multiplayersynchronizer.html#class-multiplayersynchronizer) (I will not cover that as it is a default Godot feature, however I have linked the documentation to each node.)
@@ -12,7 +16,7 @@ These are all required for this plugin to work.
 - [SteamMultiplayerPeer](https://godotengine.org/asset-library/asset/2258)
 
 ## Planned Features
-- Dedicated servers
+- Dedicated servers / explicit p2p vs. host-authority
 - Host Migration
 - More GodotSteam stuff (There is SO much to that plugin)
 - Steam User Authorization
